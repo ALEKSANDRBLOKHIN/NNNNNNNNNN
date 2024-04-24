@@ -1,0 +1,13 @@
+{% extends "default.html" %}
+
+{% load static %} {% load my_custom_filters %}  <!-- Загрузите свои пользовательские теги, если они используются -->
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+<div class="article-detail">
+    <h1>{{ article.title }}</h1>
+    <p class="publication-date">Дата публикации: {{ article.created_at|date:"d.m.Y" }}</p>
+    <div class="article-content">{{ article.content|censor }}</div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+<!-- search.html -->
+{% extends "default.html" %}
+
+{% block content %}
+<form action="{% url 'news_search' %}" method="get">
+    <label for="title">По названию:</label>
+    <input type="text" id="title" name="title">
+
+    <label for="author">По автору:</label>
+    <input type="text" id="author" name="author">
+
+    <label for="date_from">Дата публикации после:</label>
+    <input type="date" id="date_from" name="date_from">
+
+    <input type="submit" value="Поиск">
+</form>
+
+{% if news %}
+    <ul>
+        {% for item in news %}
+            <li>{{ item.title }} - {{ item.author.user.username }} - {{ item.created_at|date:"Y-m-d" }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

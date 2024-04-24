@@ -1,0 +1,20 @@
+<!-- categories_list.html -->
+{% extends "default.html" %}
+
+{% block content %}
+<h1>Категории</h1>
+<ul>
+    {% for category in categories %}
+    <li>
+        {{ category.name }}
+        {% if user.is_authenticated %}
+            {% if user in category.subscribers.all %}
+                <a href="{% url 'unsubscribe_from_category' category.id %}">Отписаться</a>
+            {% else %}
+                <a href="{% url 'subscribe_to_category' category.id %}">Подписаться</a>
+            {% endif %}
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
